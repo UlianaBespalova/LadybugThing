@@ -4,7 +4,26 @@ import Game from "./game.js";
 
 
 const fieldWidth = 10;
-const fieldHeight = 2; //количество тайлов
+const fieldHeight = 10; //количество тайлов
+
+const clickHandler = (el) => {
+    const id = parseInt(el.target.id)
+    if (id !== currentNumber) {
+        console.log("Wrong!", id, currentNumber)
+    } else {
+        console.log("OK", id, currentNumber)
+        hideTimeOutFrame(false)
+        step++
+        setTimeout(()=>{
+            currentNumber = addThing(cellArray, tileSize)
+            cellArray[currentNumber].free = false
+        }, 200)
+
+
+    }
+}
+
+
 
 //Сторона тайла в пикселях
 const countTileSize = (num, winSize) => {
@@ -46,6 +65,7 @@ const drawField = (tileSize) => {
 
 //отрисовка сразу всего массива, нужна при изменении размера
 const drawThings = (tileSize, cellArray) => {
+
     for (let i =0; i<cellArray.length; i++) {
         if (!cellArray[i].free) drawNewThing(i, tileSize);
     }
@@ -98,13 +118,28 @@ const addThing = (cellArray, tileSize) => {
     else return -1
 }
 
-//-----------------------------------
+const createTimeOutFrame = () => {
+    const frame = document.getElementById("timeoutFrame");
 
-const clickHandler = (el) => {
-    const id = parseInt(el.target.id)
-    console.log(id)
+    //здесь мы будем получать нормальный компонент с счетчиком и кнопочкой
+    const pic = document.createElement('img');
+    pic.src = './images/fon0.png'
+    pic.className = "frame"
+    pic.id = "timeoutFrameId"
+    pic.onclick = function (el) {
+        console.log("FRAME CLICK!!!!!")
+        hideTimeOutFrame()
+    }
+    frame.appendChild(pic);
 }
 
+const hideTimeOutFrame = (hiddenFlag=true) => {
+    const frame = document.getElementById("timeoutFrame");
+    frame.hidden = hiddenFlag
+}
+
+
+//-----------------------------------
 
 //--------------------------------
 const tileSize = getTileSize(fieldWidth, fieldHeight)
@@ -114,22 +149,40 @@ const cellArray = []
 for (let i = 0; i<fieldHeight*fieldWidth; i++) {
     cellArray.push({
         num: i,
-        free: true, //!!!!!!!!!!!!
+        free: true,
     });
 }
-cellArray[3].free = false;
+createTimeOutFrame()
+hideTimeOutFrame()
+
+let currentNumber = addThing(cellArray, tileSize)
+cellArray[currentNumber].free = false
+let step = 1
+//------------------
+
+
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+
+
+//---------
+
+
+
+
+
 
 //------------------------------------
 
 
-window.addEventListener('click', function() {
-
-    const tileSize = getTileSize(fieldWidth, fieldHeight)
-
-    const res = addThing(cellArray, tileSize)
-    if (res >= 0) cellArray[res].free = false
-    console.log("click ", res)
-}, true);
+// window.addEventListener('click', function() {
+//
+//     const tileSize = getTileSize(fieldWidth, fieldHeight)
+//
+//     const res = addThing(cellArray, tileSize)
+//     if (res >= 0) cellArray[res].free = false
+//     console.log("click ", res)
+// }, true);
 
 
 

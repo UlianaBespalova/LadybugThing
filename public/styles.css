@@ -9,10 +9,24 @@
     white-space:nowrap
 }
 
-
+#timeoutFrame {
+    position: absolute;
+}
 
 .tileImg {
     vertical-align: top;
     overflow: hidden
 }
 
+.frame_visible {
+    opacity: 1;
+}
+
+.frame_invisible {
+    opacity: 0.5;
+    width: 100%;
+}
+
+.frame {
+    width: 100%;
+}
