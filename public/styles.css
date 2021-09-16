@@ -1,0 +1,18 @@
+#playingFieldBack {
+    background-color: pink;
+    position: absolute;
+    white-space:nowrap
+}
+
+#playingField {
+    position: absolute;
+    white-space:nowrap
+}
+
+
+
+.tileImg {
+    vertical-align: top;
+    overflow: hidden
+}
+
