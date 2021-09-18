@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 #playingFieldBack {
     background-color: pink;
     position: absolute;
@@ -9,8 +13,16 @@
     white-space:nowrap
 }
 
+.field {
+    margin: 1vw auto;
+}
+
 #timeoutFrame {
     position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: url("./images/fon0.png") center center;
+    background-size: cover;
 }
 
 .tileImg {
@@ -18,15 +30,14 @@
     overflow: hidden
 }
 
-.frame_visible {
-    opacity: 1;
-}
 
-.frame_invisible {
-    opacity: 0.5;
-    width: 100%;
+.blink {
+    -webkit-animation: blink 1s linear infinite;
+    animation: blink 1s linear infinite;
 }
-
-.frame {
-    width: 100%;
+@-webkit-keyframes blink {
+    100% {opacity: 0}
+}
+@keyframes blink {
+    100% {opacity: 0}
 }

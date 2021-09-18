@@ -10,6 +10,10 @@ const clickHandler = (el) => {
     const id = parseInt(el.target.id)
     if (id !== currentNumber) {
         console.log("Wrong!", id, currentNumber)
+        const rightEl = document.getElementById(`${currentNumber}`);
+        rightEl.classList.add("blink");
+        setTimeout(()=>{rightEl.classList.remove("blink");}, 3000);
+        //я не знаю, насколько это тупо, но
     } else {
         console.log("OK", id, currentNumber)
         hideTimeOutFrame(false)
@@ -119,18 +123,12 @@ const addThing = (cellArray, tileSize) => {
 }
 
 const createTimeOutFrame = () => {
-    const frame = document.getElementById("timeoutFrame");
-
     //здесь мы будем получать нормальный компонент с счетчиком и кнопочкой
-    const pic = document.createElement('img');
-    pic.src = './images/fon0.png'
-    pic.className = "frame"
-    pic.id = "timeoutFrameId"
-    pic.onclick = function (el) {
+    const frame = document.getElementById("timeoutFrame");
+    frame.onclick = function (el) {
         console.log("FRAME CLICK!!!!!")
         hideTimeOutFrame()
     }
-    frame.appendChild(pic);
 }
 
 const hideTimeOutFrame = (hiddenFlag=true) => {
@@ -159,39 +157,6 @@ let currentNumber = addThing(cellArray, tileSize)
 cellArray[currentNumber].free = false
 let step = 1
 //------------------
-
-
-//-----------------------------------------------------------------
-//-----------------------------------------------------------------
-
-
-//---------
-
-
-
-
-
-
-//------------------------------------
-
-
-// window.addEventListener('click', function() {
-//
-//     const tileSize = getTileSize(fieldWidth, fieldHeight)
-//
-//     const res = addThing(cellArray, tileSize)
-//     if (res >= 0) cellArray[res].free = false
-//     console.log("click ", res)
-// }, true);
-
-
-
-
-
-
-
-
-
 
 
 //--------------------------------------------------------------------------
